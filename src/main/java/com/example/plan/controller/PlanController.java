@@ -2,6 +2,7 @@ package com.example.plan.controller;
 
 import com.example.plan.domain.dto.PlanCreateRequestDto;
 import com.example.plan.domain.dto.PlanResponseDto;
+import com.example.plan.domain.dto.PlanUpdateDto;
 import com.example.plan.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,11 +35,20 @@ public class PlanController {
     }
 
     //선택 조회
-    @GetMapping("/{planId}")
+    @GetMapping("/{Id}")
     public ResponseEntity<PlanResponseDto> getPlan(
-            @PathVariable Long planId
+            @PathVariable Long Id
     ) {
-        PlanResponseDto responseDto = planService.getPlan(planId);
+        PlanResponseDto responseDto = planService.getPlan(Id);
         return ResponseEntity.ok(responseDto);
+    }
+
+    //일정 수정
+    @PatchMapping("/{Id}")
+    public ResponseEntity<PlanResponseDto> updatePlan(
+            @PathVariable Long Id,
+            @RequestBody PlanUpdateDto updateDto
+    ) {
+        return ResponseEntity.ok(planService.updateDto(Id, updateDto));
     }
 }

@@ -3,6 +3,7 @@ package com.example.plan.service;
 import com.example.plan.domain.Plan;
 import com.example.plan.domain.dto.PlanCreateRequestDto;
 import com.example.plan.domain.dto.PlanResponseDto;
+import com.example.plan.domain.dto.PlanUpdateDto;
 import com.example.plan.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,19 @@ public class PlanService {
 
         return new PlanResponseDto(plan);
     }
+
+    @Transactional
+    public PlanResponseDto updateDto(Long id, PlanUpdateDto updateDto) {
+        Plan plan = planRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("일정을 찾을 수 없습니다."));
+
+        if (plan.isPasswordMismatch(updateDto.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        plan.update(updateDto.getTitle(), updateDto.getAuthor());
+
+        return new PlanResponseDto(plan);
+    }
+    
 }
