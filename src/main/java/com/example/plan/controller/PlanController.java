@@ -1,6 +1,7 @@
 package com.example.plan.controller;
 
 import com.example.plan.domain.dto.PlanCreateRequestDto;
+import com.example.plan.domain.dto.PlanDeleteDto;
 import com.example.plan.domain.dto.PlanResponseDto;
 import com.example.plan.domain.dto.PlanUpdateDto;
 import com.example.plan.service.PlanService;
@@ -50,5 +51,14 @@ public class PlanController {
             @RequestBody PlanUpdateDto updateDto
     ) {
         return ResponseEntity.ok(planService.updateDto(Id, updateDto));
+    }
+
+    @DeleteMapping("/{Id}")
+    public ResponseEntity<Void> deletePlan(
+            @PathVariable Long Id,
+            @RequestBody PlanDeleteDto deleteDto
+    ) {
+        planService.deletePlan(Id, deleteDto);
+        return ResponseEntity.noContent().build();
     }
 }

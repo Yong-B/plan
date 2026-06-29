@@ -11,4 +11,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findAllByOrderByModifiedAtDesc();
 
     List<Plan> findAllByAuthorOrderByModifiedAtDesc(String author);
+
+    Long id(Long id);
 }

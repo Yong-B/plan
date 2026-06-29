@@ -2,6 +2,7 @@ package com.example.plan.service;
 
 import com.example.plan.domain.Plan;
 import com.example.plan.domain.dto.PlanCreateRequestDto;
+import com.example.plan.domain.dto.PlanDeleteDto;
 import com.example.plan.domain.dto.PlanResponseDto;
 import com.example.plan.domain.dto.PlanUpdateDto;
 import com.example.plan.repository.PlanRepository;
@@ -66,5 +67,15 @@ public class PlanService {
 
         return new PlanResponseDto(plan);
     }
-    
+
+    @Transactional
+    public void deletePlan(Long Id, PlanDeleteDto deleteDto) {
+        Plan plan = planRepository.findById(Id)
+                .orElseThrow(() -> new IllegalArgumentException("일정을 찾을 수 없습니다."));
+
+        plan.validatePassword(deleteDto.getPassword());
+
+        planRepository.delete(plan);
+                
+    }
 }
