@@ -4,9 +4,11 @@ import com.example.plan.domain.Plan;
 import com.example.plan.domain.dto.PlanCreateRequestDto;
 import com.example.plan.domain.dto.PlanResponseDto;
 import com.example.plan.repository.PlanRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +27,28 @@ public class PlanService {
         Plan savedPlan = planRepository.save(plan);
 
         return new PlanResponseDto(savedPlan);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PlanResponseDto> getPlans(String author) {
+        List<Plan> plans;
+
+        if (author == null || author.isBlank()) {
+            plans = planRepository.findAllByOrderByModifiedAtDesc();
+        } else {
+            plans = planRepository.findAllByAuthorOrderByModifiedAtDesc(author);
+        }
+
+        return plans.stream()
+                .map(PlanResponseDto::new)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public PlanResponseDto getPlan(Long planId) {
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new IllegalArgumentException("일정을 찾을 수 없습니다."));
+
+        return new PlanResponseDto(plan);
     }
 }
