@@ -6,10 +6,9 @@ import com.example.plan.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/plans")
@@ -23,5 +22,23 @@ public class PlanController {
     ) {
         PlanResponseDto responseDto = planService.createPlan(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+    }
+
+    //전체 조회
+    @GetMapping
+    public ResponseEntity<List<PlanResponseDto>> getPlans(
+            @RequestParam(required = false) String author
+    ) {
+        List<PlanResponseDto> responseDtos = planService.getPlans(author);
+        return ResponseEntity.ok(responseDtos);
+    }
+
+    //선택 조회
+    @GetMapping("/{planId}")
+    public ResponseEntity<PlanResponseDto> getPlan(
+            @PathVariable Long planId
+    ) {
+        PlanResponseDto responseDto = planService.getPlan(planId);
+        return ResponseEntity.ok(responseDto);
     }
 }
