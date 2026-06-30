@@ -1,4 +1,4 @@
-package com.example.plan.domain;
+﻿package com.example.comment.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -12,18 +12,19 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Table(name = "plans")
+@Table(name = "comment")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class Plan {
+public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
-    private String title;
+    @Column(name = "plan_id", nullable = false)
+    private Long planId; // 연관관계 없이 일정 ID를 직접 가짐
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 100)
     private String content;
 
     @Column(nullable = false, length = 50)
@@ -39,26 +40,11 @@ public class Plan {
     @LastModifiedDate
     @Column(name = "modified_at", nullable = false)
     private LocalDateTime modifiedAt;
-
-    public Plan(String title, String content, String author, String password) {
-        this.title = title;
+    
+    public Comment(Long planId, String content, String author, String password) {
+        this.planId = planId;
         this.content = content;
         this.author = author;
         this.password = password;
-    }
-
-    public void update(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
-
-    public boolean isPasswordMismatch(String password) {
-        return !this.password.equals(password);
-    }
-
-    public void validatePassword(String password) {
-        if (!this.password.equals(password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
     }
 }
