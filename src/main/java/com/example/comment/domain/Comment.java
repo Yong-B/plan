@@ -40,7 +40,7 @@ public class Comment {
     @LastModifiedDate
     @Column(name = "modified_at", nullable = false)
     private LocalDateTime modifiedAt;
-
+    
     public Comment(Long planId, String content, String author, String password) {
         this.planId = planId;
         this.content = content;
