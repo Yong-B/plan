@@ -10,13 +10,4 @@
 
 
 ## 2. 상세 API 명세 (JSON Specs)
-### 1. 일정 생성
-* **URL**: `POST /api/plans`
-* **Request Body (PlanCreateRequestDto)**
-```json
-{
-  "title": "최용범 두 번째 일정",
-  "content": "작성자 조건 조회 테스트",
-  "author": "최용범",
-  "password": "1234"
-}[Uploading ## 2. 상세 API 명세 (JSON Specs).txt…]()
+[API 명세서 메모장 확인하기](./docs/api-specs.txt)
