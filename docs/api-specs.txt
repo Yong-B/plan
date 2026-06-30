@@ -1,7 +1,7 @@
 1. 일정 생성
-URL: `POST /api/plans`
+URL: POST /api/plans
 Request Body (PlanCreateRequestDto)
-```json
+
 {
   "title": "최용범 두 번째 일정",
   "content": "작성자 조건 조회 테스트",
@@ -21,7 +21,10 @@ Response Body (PlanResponseDto)
 }
 
 2. 일정 전체/조건 조회
+URL: GET /api/plans
+Response Body (List<PlanResponseDto>)
 
+[
   {
     "id": 2,
     "title": "최용범 두 번째 일정",
@@ -38,9 +41,9 @@ Response Body (PlanResponseDto)
     "createdAt": "2026-06-29T13:17:30",
     "modifiedAt": "2026-06-29T13:17:30"
   }
+]
 
 3. 일정 선택 조회
-
 URL: GET /api/plans/1
 Response Body (PlanResponseDto)
 
@@ -64,6 +67,7 @@ Request Body (PlanUpdateDto)
 }
 
 Response Body (PlanResponseDto)
+
 {
   "id": 2,
   "title": "수정된 제목",
