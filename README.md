@@ -11,3 +11,6 @@
 
 ## 2. 상세 API 명세 (JSON Specs)
 [API 명세서 메모장 확인하기](./docs/api-specs.txt)
+
+## 📌 ERD
+<img width="160" height="201" alt="image" src="https://github.com/user-attachments/assets/d59caa83-a1ce-4c23-8ebf-e6e81a71d15b" />
