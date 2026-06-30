@@ -1,0 +1,82 @@
+1. 일정 생성
+URL: `POST /api/plans`
+Request Body (PlanCreateRequestDto)
+```json
+{
+  "title": "최용범 두 번째 일정",
+  "content": "작성자 조건 조회 테스트",
+  "author": "최용범",
+  "password": "1234"
+}
+
+Response Body (PlanResponseDto)
+
+{
+  "id": 2,
+  "title": "최용범 두 번째 일정",
+  "content": "작성자 조건 조회 테스트",
+  "author": "최용범",
+  "createdAt": "2026-06-29T13:40:00",
+  "modifiedAt": "2026-06-29T13:40:00"
+}
+
+2. 일정 전체/조건 조회
+
+  {
+    "id": 2,
+    "title": "최용범 두 번째 일정",
+    "content": "작성자 조건 조회 테스트",
+    "author": "최용범",
+    "createdAt": "2026-06-29T13:40:00",
+    "modifiedAt": "2026-06-29T13:40:00"
+  },
+  {
+    "id": 1,
+    "title": "Lv1 테스트",
+    "content": "일정 생성 API 테스트",
+    "author": "최용범",
+    "createdAt": "2026-06-29T13:17:30",
+    "modifiedAt": "2026-06-29T13:17:30"
+  }
+
+3. 일정 선택 조회
+
+URL: GET /api/plans/1
+Response Body (PlanResponseDto)
+
+{
+  "id": 1,
+  "title": "Lv1 테스트",
+  "content": "일정 생성 API 테스트",
+  "author": "최용범",
+  "createdAt": "2026-06-29T13:17:30",
+  "modifiedAt": "2026-06-29T13:17:30"
+}
+
+4. 일정 수정
+URL: PATCH /api/plans/2
+Request Body (PlanUpdateDto)
+
+{
+  "title": "수정된 제목",
+  "author": "수정된 작성자",
+  "password": "1234"
+}
+
+Response Body (PlanResponseDto)
+{
+  "id": 2,
+  "title": "수정된 제목",
+  "content": "작성자 조건 조회 테스트",
+  "author": "수정된 작성자",
+  "createdAt": "2026-06-29T13:40:00",
+  "modifiedAt": "2026-06-30T11:36:00"
+}
+
+5. 일정 삭제
+URL: DELETE /api/plans/1
+Request Body (PlanDeleteDto)
+
+{
+  "password": "1234"
+}
