@@ -1,4 +1,4 @@
-﻿package com.example.comment.repository;
+package com.example.comment.repository;
 
 import com.example.comment.domain.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;

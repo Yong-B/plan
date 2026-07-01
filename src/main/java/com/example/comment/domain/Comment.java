@@ -1,4 +1,4 @@
-﻿package com.example.comment.domain;
+package com.example.comment.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
